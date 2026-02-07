@@ -1,23 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0a0a0a;
-  --color-surface: #121212;
-  --color-roleBlue: #3b82f6;
+  --color-background: #000000;
+  --color-surface: #0a0a0a;
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-accent: #f43f5e;
 
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --animate-glow-pulse: glow-pulse 3s infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spotlight: spotlight 2s ease .75s 1 forwards;
 
-  @keyframes glow-pulse {
+  @keyframes shimmer {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes float {
 
     0%,
     100% {
-      box-shadow: 0 0 20px 0px rgba(139, 92, 246, 0.5);
+      transform: translateY(0);
     }
 
     50% {
-      box-shadow: 0 0 30px 5px rgba(139, 92, 246, 0.7);
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .5;
+    }
+  }
+
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
     }
   }
 }
@@ -29,6 +68,14 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+
+  .spotlight-card {
+    @apply relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-900/50 p-8;
   }
 }
