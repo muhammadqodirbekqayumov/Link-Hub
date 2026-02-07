@@ -3,7 +3,8 @@ import {
   Instagram, Send, MapPin, Award, GraduationCap,
   Linkedin, Github, User, Mail, Briefcase,
   ExternalLink, Globe, Play, Code, Palette, Zap,
-  Terminal, Cpu, ChevronRight
+  Terminal, Cpu, ChevronRight, FileText, Twitter, Youtube,
+  Framer, Atom, Database
 } from 'lucide-react';
 import { BentoCard } from './components/BentoCard';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,209 +21,191 @@ function App() {
   }, []);
 
   const profile = {
-    name: "Muhammadqodirbek",
-    surname: "Qayumov",
-    role: "Oil & Gas Engineer",
+    name: "M.Qodirbek",
+    role: "Oil & Gas Engineer & Creative Developer",
     username: "@engineer_of_depth",
-    avatar: "/avatar.jpg" // Removed random query param to prevent flickering
+    avatar: "/avatar.jpg"
   };
 
-  const variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.1, duration: 0.5, type: "spring" }
-    })
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#000000] text-white p-4 py-12 md:p-8 flex flex-col items-center font-sans overflow-x-hidden selection:bg-blue-500/30">
+    <div className="relative min-h-screen w-full bg-[#020205] text-white p-6 md:p-12 font-sans overflow-x-hidden selection:bg-purple-500/30">
 
-      {/* Background Ambience */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse-slow delay-1000" />
-        <div className="absolute inset-0 bg-noise opacity-20 mixed-blend-overlay" />
+      {/* Aurora Background Effects */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            x: [0, 40, 0],
+            y: [0, -40, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] right-[-10%] w-[900px] h-[900px] bg-purple-600/10 rounded-full blur-[160px]"
+        />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
       </div>
 
-      {/* Mouse Spotlight (Subtle) */}
+      {/* Mouse Spotlight */}
       <div
-        className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-500"
+        className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(168, 85, 247, 0.08), transparent 80%)`
         }}
       />
 
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)] z-10">
+      <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6">
 
-        {/* 1. Main Profile Card (Big Block) */}
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          className="md:col-span-2 md:row-span-2 glass-card rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        {/* Left Column (Logo & Nav, Profile, Primary Action) */}
+        <div className="md:col-span-5 flex flex-col gap-6">
 
-          <div className="relative z-10">
-            <div className="flex items-center gap-6 mb-8">
-              <div className="relative w-24 h-24 md:w-28 md:h-28">
-                <div className="absolute inset-0 rounded-full bg-blue-500/50 blur-md animate-pulse" />
-                <img
-                  src={profile.avatar}
-                  alt="Avatar"
-                  className="relative w-full h-full rounded-full border-2 border-white/10 object-cover shadow-2xl"
-                />
-                <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#000] rounded-full flex items-center justify-center border border-white/10">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+          {/* Logo & Simple Nav */}
+          <motion.div {...fadeInUp} className="glass-card rounded-[40px] p-8 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center font-bold text-xl shadow-lg shadow-purple-500/20">
+                M
+              </div>
+              <span className="text-2xl font-bold tracking-tight">Qayumov</span>
+            </div>
+            <nav className="hidden sm:flex flex-col text-right text-white/50 font-medium text-sm">
+              <a href="#" className="hover:text-white transition-colors">About</a>
+              <a href="#" className="hover:text-white transition-colors">Work</a>
+              <a href="#" className="hover:text-white transition-colors">Contact</a>
+            </nav>
+          </motion.div>
+
+          {/* Profile Card */}
+          <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="glass-card rounded-[40px] p-8 flex flex-col gap-6 relative overflow-hidden group">
+            <div className="flex items-center gap-6">
+              <div className="relative w-32 h-32 flex-shrink-0">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-purple-500/20 to-blue-500/20 blur-xl group-hover:blur-2xl transition-all" />
+                <img src={profile.avatar} className="relative w-full h-full rounded-3xl object-cover border border-white/10 shadow-2xl" alt="Profile" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h1 className="text-2xl md:text-3xl font-bold leading-tight">
+                  Oil & Gas Engineer & <br /> Creative Developer
+                </h1>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-xs font-semibold text-white/50 uppercase tracking-widest">available for work</span>
                 </div>
               </div>
+            </div>
+          </motion.div>
 
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider mb-2"
-                >
-                  <Terminal size={12} />
-                  AVAILABLE FOR WORK
-                </motion.div>
-                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-                  {profile.name} <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                    {profile.surname}
-                  </span>
-                </h1>
+          {/* Large Action Card (Resume) */}
+          <motion.a
+            href="/resume.pdf"
+            target="_blank"
+            {...fadeInUp}
+            transition={{ delay: 0.2 }}
+            className="glass-card rounded-[40px] p-10 flex items-center justify-between group hover:bg-white/[0.05] transition-all"
+          >
+            <div className="flex flex-col gap-2">
+              <h2 className="text-2xl font-bold">Mening Rezyumem.</h2>
+              <p className="text-white/40 font-medium">To'liq CV yuklab olish uchun bosing.</p>
+            </div>
+            <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all">
+              <ChevronRight size={28} />
+            </div>
+          </motion.a>
+        </div>
+
+        {/* Right Column (Featured, Recent, Skills, Contact) */}
+        <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-max">
+
+          {/* Featured Projects */}
+          <motion.div {...fadeInUp} transition={{ delay: 0.3 }} className="sm:col-span-2 glass-card rounded-[40px] p-8 flex flex-col gap-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold">Asosiy Loyihalar</h3>
+              <a href="#" className="text-sm text-white/40 hover:text-white transition-colors">Barchasi</a>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 relative overflow-hidden group cursor-pointer hover:border-purple-500/30 transition-all">
+                  <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {i === 1 && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                      <Play fill="currentColor" className="w-8 h-8 opacity-40 mb-2" />
+                      <span className="text-[10px] font-bold uppercase tracking-tighter opacity-30">YukGO</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Education / Blog Posts (Adapted) */}
+          <motion.div {...fadeInUp} transition={{ delay: 0.4 }} className="glass-card rounded-[40px] p-8 flex flex-col justify-between min-h-[180px]">
+            <h4 className="font-bold text-white/40 uppercase text-xs tracking-widest mb-4">Ta'lim</h4>
+            <div>
+              <p className="font-bold text-lg leading-tight">Gubkin University</p>
+              <p className="text-white/40 text-sm mt-1">Oil & Gas (2021-2025)</p>
+            </div>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ delay: 0.5 }} className="glass-card rounded-[40px] p-8 flex flex-col justify-between min-h-[180px]">
+            <h4 className="font-bold text-white/40 uppercase text-xs tracking-widest mb-4">Daraja</h4>
+            <div>
+              <p className="font-bold text-lg leading-tight">Master's Degree</p>
+              <p className="text-white/40 text-sm mt-1">Innovatsion texnologiyalar @ TDTU</p>
+            </div>
+          </motion.div>
+
+          {/* Skills & Tools */}
+          <motion.div {...fadeInUp} transition={{ delay: 0.6 }} className="glass-card rounded-[40px] p-8 flex flex-col gap-6">
+            <h3 className="text-xl font-bold">Ko'nikmalar</h3>
+            <div className="flex gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group hover:bg-white hover:text-black transition-all">
+                <Atom size={20} />
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group hover:bg-white hover:text-black transition-all">
+                <Cpu size={20} />
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group hover:bg-white hover:text-black transition-all">
+                <Database size={20} />
               </div>
             </div>
+          </motion.div>
 
-            <p className="text-gray-400 text-lg leading-relaxed max-w-lg">
-              Raqamli texnologiyalar va energetika chorrahasida innovatsion yechimlar.
-              <span className="text-gray-200 block mt-2 font-medium">
-                Ma'lumotlar bilan ishlash, tahlil va kelajak muhandisligi.
-              </span>
-            </p>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3 relative z-10">
-            <div className="group/tag flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-colors">
-              <Briefcase size={16} className="text-blue-400 group-hover/tag:scale-110 transition-transform" />
-              <span className="text-sm font-medium text-gray-300">Oil & Gas Engineer</span>
+          {/* Get in Touch */}
+          <motion.div {...fadeInUp} transition={{ delay: 0.7 }} className="glass-card rounded-[40px] p-8 flex flex-col gap-4">
+            <h3 className="text-xl font-bold text-glow">Bog'lanish</h3>
+            <p className="text-sm text-white/40 font-medium">qayumov@example.com</p>
+            <div className="flex gap-4 mt-2">
+              <a href="#" className="text-white/40 hover:text-white transition-colors"><Github size={20} /></a>
+              <a href="#" className="text-white/40 hover:text-white transition-colors"><Send size={20} /></a>
+              <a href="#" className="text-white/40 hover:text-white transition-colors"><Twitter size={20} /></a>
+              <a href="#" className="text-white/40 hover:text-white transition-colors"><Youtube size={20} /></a>
             </div>
-            <div className="group/tag flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-colors">
-              <MapPin size={16} className="text-purple-400 group-hover/tag:scale-110 transition-transform" />
-              <span className="text-sm font-medium text-gray-300">Tashkent, UZ</span>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* 2. Social & Contact Block */}
-        <motion.div
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          className="md:col-span-1 md:row-span-1 glass-card rounded-3xl p-6 flex flex-col justify-center gap-4 relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 p-4 opacity-20">
-            <Send size={80} />
-          </div>
-
-          <h3 className="text-xl font-bold text-white relative z-10">Aloqa</h3>
-          <div className="flex gap-4 relative z-10">
-            {[
-              { icon: Github, href: "#", color: "hover:bg-gray-800" },
-              { icon: Instagram, href: "https://instagram.com/engineer_of_depth", color: "hover:bg-pink-900/50" },
-              { icon: Send, href: "https://t.me/QayumovMuhammadqodirbek", color: "hover:bg-blue-900/50" }
-            ].map((s, i) => (
-              <motion.a
-                key={i}
-                href={s.href}
-                target="_blank"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 transition-colors ${s.color}`}
-              >
-                <s.icon size={22} className="text-gray-300" />
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 3. Resume / CV DL */}
-        <BentoCard
-          title="CV Yuklash"
-          subtitle="Rezyume (PDF)"
-          href="#"
-          icon={ExternalLink}
-          className="md:col-span-1 md:row-span-1 bg-gradient-to-br from-blue-600 to-indigo-700 !border-none"
-        >
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
-          <div className="absolute bottom-4 right-4">
-            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <ChevronRight className="text-white" />
-            </div>
-          </div>
-        </BentoCard>
-
-
-        {/* 4. Project: YukGO */}
-        <BentoCard
-          className="md:col-span-2 md:row-span-1 !bg-[#0f0f16] group overflow-hidden"
-          title="YukGO Logistics"
-          subtitle="Logistika tushunchasini o'zgartiruvchi platforma."
-          href="https://t.me/YukGoLogistic/3"
-        >
-          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20" />
-          </div>
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-blue-500 rounded-full shadow-lg shadow-blue-500/40 group-hover:scale-110 transition-transform">
-            <Play fill="white" className="ml-1 text-white" />
-          </div>
-        </BentoCard>
-
-        {/* 5. Education: Gubkin */}
-        <BentoCard
-          className="md:col-span-1 h-48 !bg-[#121212]"
-          title="Gubkin University"
-          subtitle="Neft va Gaz ishi (2021-2025)"
-          icon={GraduationCap}
-          header={
-            <div className="mb-4 w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center border border-yellow-500/20">
-              <GraduationCap size={20} />
-            </div>
-          }
-        />
-
-        {/* 6. Education: TDTU */}
-        <BentoCard
-          className="md:col-span-1 h-48 !bg-[#121212]"
-          title="TDTU Masters"
-          subtitle="Innovatsion texnologiyalar"
-          icon={Zap}
-          header={
-            <div className="mb-4 w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center border border-red-500/20">
-              <Zap size={20} />
-            </div>
-          }
-        />
-
+        </div>
       </div>
 
       <motion.footer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-16 text-gray-600 text-sm font-medium"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="mt-20 text-center text-white/10 text-xs font-bold uppercase tracking-[0.2em]"
       >
-        © 2026 Engineer of Depth. All rights reserved.
+        Designed with Love & code by Qayumov • 2026
       </motion.footer>
     </div>
   );
 }
 
 export default App;
-
