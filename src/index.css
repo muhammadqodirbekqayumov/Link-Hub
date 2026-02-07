@@ -12,29 +12,29 @@
 
   --animate-aurora: aurora 60s linear infinite;
   --animate-glow: glow 4s ease-in-out infinite;
+}
 
-  @keyframes aurora {
-    from {
-      background-position: 50% 50%, 50% 50%;
-    }
-
-    to {
-      background-position: 350% 50%, 350% 50%;
-    }
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
   }
 
-  @keyframes glow {
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
 
-    0%,
-    100% {
-      opacity: 0.3;
-      filter: blur(20px);
-    }
+@keyframes glow {
 
-    50% {
-      opacity: 0.6;
-      filter: blur(35px);
-    }
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: blur(20px);
+  }
+
+  50% {
+    opacity: 0.6;
+    filter: blur(35px);
   }
 }
 
